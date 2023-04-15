@@ -1,0 +1,5 @@
+getline_func:
+	get_user_input
+	only works with double pointer as it needs address of pointer to store
+	characters in i think passing by address instead of refernece will work
+	instead of declaring a double pointer

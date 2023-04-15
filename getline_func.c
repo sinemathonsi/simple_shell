@@ -41,7 +41,7 @@ int get_user_input(char **input)
 		if (ind > buffsize)
 		{
 			buffsize += buffsize;
-			input = realloc((*input), buffsize * sizeof(char));
+			*input = realloc((*input), buffsize * sizeof(char));
 			if ((*input) == NULL)
 			{
 				perror("realloc failed");
