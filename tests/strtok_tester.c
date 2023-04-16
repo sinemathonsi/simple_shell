@@ -11,7 +11,7 @@ unsigned int num_of_words(char *input)
 
 	if (input == NULL)
 		return (0);
-
+	
 	for (i = 0; input[i] != '\0'; i++)
 	{
 		if (input[i] != ' ')
@@ -52,7 +52,7 @@ void init_argv(char **arr, char *input)
 			word_holder[j] = '\0';
 			i--;
 			arr[k] = malloc(strlen(word_holder) * sizeof(char)); /* allocate len of word_holder to arr at index k */
-			arr[k] = strdup(word_holder); /* duplicate word_holder into arr */
+			strcpy(arr[k], word_holder); /* duplicate word_holder into arr */
 			k++;
 		}
 	}
