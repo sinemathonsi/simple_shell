@@ -1,18 +1,17 @@
 #include "main.h"
 
 /**
- * over here i am trying to replicate strtok
- * i am getting a segmentation fault somewhere
+ * num_of_words - find number of words in input
+ * @input: sentence to count words
+ * Return: words counted
 */
-int main(void)
+unsigned int num_of_words(char *input)
 {
-	unsigned int i, j, k = 0, words = 0;
-	char *input = NULL;
-	char **arr = NULL; /* gonna try to store each word here sp arr is arr of strings */
-	char word_holder[1024];
+	unsigned int i, words = 0;
 
-	get_user_input(&input);
-	/* find how man words are in the input, using " " as delimiter */
+	if (input == NULL)
+		return (0);
+
 	for (i = 0; input[i] != '\0'; i++)
 	{
 		if (input[i] != ' ')
@@ -24,8 +23,18 @@ int main(void)
 			}
 		}
 	}
+	return (words);
+}
 
-	arr = malloc((words + 1) * sizeof(char)); /* allocate by number of words */
+/**
+ * init_argv - initialize a 2d array with strings
+ * @arr: array to init
+ * @input: string to seperate and place in arr
+*/
+void init_argv(char **arr, char *input)
+{
+	unsigned int i, j, k = 0;
+	char word_holder[1024];
 
 	/* store words into arr */
 	for (i = 0; input[i] != '\0'; i++)
@@ -41,14 +50,35 @@ int main(void)
 				i++;
 			}
 			word_holder[j] = '\0';
-			if (input[i] == '\0')
-				i--;
+			i--;
+			arr[k] = malloc(strlen(word_holder) * sizeof(char)); /* allocate len of word_holder to arr at index k */
+			arr[k] = strdup(word_holder); /* duplicate word_holder into arr */
+			k++;
 		}
-		arr[k] = malloc(strlen(word_holder) * sizeof(char)); /* allocate len of word_holder to arr at index k */
-		arr[k] = strdup(word_holder); /* duplicate word_holder into arr */
-		k++;
 	}
-	arr[k] = NULL; /* null terminate arr */
+	arr[k] = NULL;
+}
+
+/**
+ * over here i am trying to replicate strtok
+ * i am getting a segmentation fault somewhere
+*/
+int main(void)
+{
+	unsigned int i, j, words = 0;
+	char *input = NULL;
+	char **arr = NULL; /* gonna try to store each word here sp arr is arr of strings */
+	char word_holder[1024];
+
+	get_user_input(&input);
+	/* find how man words are in the input, using " " as delimiter */
+	words = num_of_words(input);
+	printf("%u\n", words);
+
+	arr = malloc((words + 1) * sizeof(char *)); /* allocate by number of words */
+
+	/* store words into arr */
+	init_argv(arr, input);
 
 	/**
 	 * test to check if all words added successfully
