@@ -1,5 +1,9 @@
 #include "main.h"
 
+/**
+ * over here i am trying to replicate strtok
+ * i am getting a segmentation fault somewhere
+*/
 int main(void)
 {
 	unsigned int i, j, k = 0, words = 0;
@@ -30,13 +34,15 @@ int main(void)
 		{
 			/* first store word into word_holder */
 			j = 0;
-			while (input[i] != ' ') /* there is a BUG here because space is not the only delimeter */
+			while (input[i] != ' ' && input[i] != '\0')
 			{
 				word_holder[j] = input[i];
 				j++;
 				i++;
 			}
 			word_holder[j] = '\0';
+			if (input[i] == '\0')
+				i--;
 		}
 		arr[k] = malloc(strlen(word_holder) * sizeof(char)); /* allocate len of word_holder to arr at index k */
 		arr[k] = strdup(word_holder); /* duplicate word_holder into arr */
@@ -46,8 +52,7 @@ int main(void)
 
 	/**
 	 * test to check if all words added successfully
-	 * it fails because even though i check for each word it still keeps going
-	 * space is not the only delimeter i need to check for
+	 * i am getting a segmentation fault im not sure where
 	*/
 	for (i = 0; arr[i] != NULL; i++)
 	{
@@ -63,4 +68,3 @@ int main(void)
 	free(arr);
 	return (0);
 }
-
