@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "main.h"
 
 #define BUFF_SIZE 10
 
@@ -9,11 +9,6 @@
 */
 int get_user_input(char **input)
 {
-	/**
-	 * Usage:
-	 * char *input, **p = &input;
-	 * get_user_input(p);
-	 */
 	unsigned int buffsize = BUFF_SIZE, ind = 0;
 	char c;
 

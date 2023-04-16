@@ -1,15 +1,22 @@
-#include "shell.h"
+#include "main.h"
 
-int get_user_input(char **input);
-/* prototype is here and not in .h file */
-
-int main(void)
+int main(int ac, char **av, char **env)
 {
-	char *input, **p = &input;
-
-	printf("Enter text -> ");
-	get_user_input(p);
-	printf("%s\n", input);
-	free(input);
+	char *input;
+	int check;
+	
+	printf("Code to test getline\n");
+	printf("($)");
+	get_user_input(&input);
+	printf("You wrote - %s\n\n", input);
+	check = which_func(input, "98", env);
+	if (check == 0)
+	{
+		return (0);
+	}
+	else
+	{
+		return (-1);
+	}
 	return (0);
 }
