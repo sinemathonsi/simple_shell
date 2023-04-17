@@ -42,6 +42,7 @@ int which_func(char *input, char *arg)
 		{"exit", shell_exit},
 		{"env", print_the_env},
 		{"setenv", set_env_var},
+		{"cd", chnge_w_dir},
 		{'\0', NULL}};
 
 	for (i = 0; *for_shell[i].func_names != '\0'; i++)

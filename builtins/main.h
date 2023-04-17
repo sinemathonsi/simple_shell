@@ -31,6 +31,7 @@ int which_func(char *input, char *arg);
 void print_the_env(char *input);		 /* prints the environmet variables, needs work */
 void shell_exit(char *args); /* shell exit function trial */
 void set_env_var(char *arg); /* trying to set new env var */
+void chnge_w_dir(char *arg); /* trial changing directory */
 
 /* helpers */
 unsigned int count_words(char *input);
