@@ -25,16 +25,20 @@ typedef struct builtin_funcs
 } builtins;
 
 char *found_path(char *cmd);
+
 void exec_cmd(char *cmd_with_path, char **av);
 
+/* utilities */
 int word_count(char *input);
 void parse_inp(char **av, char *input);
-void sig_handler(int signal);
+int stringcmp(char *s1, char *s2);
 
-void shell_loop(char **av);
+void shell_loop(char *argv_0_holder, char **av);
 
 int which_func(char *input, char *arg);
+
 void builtin_exit(char *status);
+
 void builtin_print_env(char *arg);
 
 #endif

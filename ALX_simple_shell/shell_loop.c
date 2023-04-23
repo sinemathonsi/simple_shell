@@ -1,31 +1,29 @@
 #include "main.h"
 
-void shell_loop(char **av)
+void shell_loop(char *argv_0_holder, char **av)
 {
-	char *input, *path_to_cmd, **arr;
+	char *input, *path_to_cmd;
 	size_t n = 0;
 	ssize_t got_line;
 	int words;
 
-	printf("($)");
+	printf("($)"); /* print prompt */
 	got_line = getline(&input, &n, stdin);
-	if (got_line == -1)
+	if (got_line == -1) /* catch eof character */
 	{
 		putchar('\n');
 		exit(0);
 	}
-
 	words = word_count(input);
-	arr = malloc((words + 1) * sizeof(char *));
-
-	parse_inp(arr, input);
+	av = malloc((words + 1) * sizeof(char *)); /* allocate mem to argv */
+	parse_inp(av, input);					   /* fill argv with strings */
 	if (*input == '\n')
 		return;
 
-	which_func(arr[0], arr[1]);
-	path_to_cmd = found_path(arr[0]);
-	if (path_to_cmd == NULL)
-		dprintf(STDERR_FILENO, "%s: No such file or directory\n", av[0]);
+	which_func(av[0], av[1]);		 /* find and execute builtin function */
+	path_to_cmd = found_path(av[0]); /* find path to non builtin function */
+	if (path_to_cmd == NULL)		 /* command not found */
+		dprintf(STDERR_FILENO, "%s: No such file or directory\n", argv_0_holder);
 	else
-		exec_cmd(path_to_cmd, arr);
+		exec_cmd(path_to_cmd, av); /* execute found command */
 }

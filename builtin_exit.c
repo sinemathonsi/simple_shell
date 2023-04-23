@@ -4,7 +4,7 @@
  * shell_exit - the builtin exit function
  * @args: args to pass to exit
  * @env: necessary for struct to use built in env function, not used here though
-*/
+ */
 void shell_exit(char *args, char **env)
 {
 	int num;

@@ -1,53 +1,19 @@
 #include "main.h"
 
-int word_count(char *input)
-{
-	int num_of_words = 0, i;
-
-	for (i = 0; input[i] != '\0'; i++)
-	{
-		if (input[i] != ' ')
-		{
-			num_of_words++;
-			while (input[i] != ' ' && input[i] != '\0')
-			{
-				i++;
-			}
-			i--;
-		}
-	}
-	return (num_of_words);
-}
-
-void parse_inp(char **av, char *input)
-{
-	int i;
-	char *token;
-
-	token = strtok(input, " \n");
-	for (i = 0; token != NULL; i++)
-	{
-		av[i] = malloc(strlen(token) * sizeof(char));
-		strcpy(av[i], token);
-		token = strtok(NULL, " \n");
-	}
-	av[i] = NULL;
-}
-
+/**
+ * main - Entry point
+ * @ac: unused argument
+ * @av: 2d array for command line args
+ * Return: 0 Success
+ */
 int main(__attribute__((unused)) int ac, char **av)
 {
-	char *input, **arr;
+	char *argv_0_holder = av[0]; /* holds name of program for err msg */
 	int i;
 
 	while (1)
 	{
-		shell_loop(av);
+		shell_loop(argv_0_holder, av);
 	}
-	for (i = 0; arr[i] != NULL; i++)
-	{
-		free(arr[i]);
-	}
-	free(arr);
-	free(input);
 	return (0);
 }
