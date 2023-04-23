@@ -5,8 +5,8 @@
  * @s1: 1st string
  * @s2: second string
  * Return: Matched (1), Not mathed (0)
-*/
-int stringcmp(char *s1, char*s2)
+ */
+int stringcmp(char *s1, char *s2)
 {
 	int i;
 
@@ -32,23 +32,21 @@ int stringcmp(char *s1, char*s2)
  * which_func - matches user input to builtin function
  * @input: user input to match
  * @arg: an arg to pass if built in func is matched
- * @env: an arg for the the env built in function
  * Return: Builtin matched (0), Not matched (-1)
-*/
-int which_func(char *input, char *arg, char **env)
+ */
+int which_func(char *input, char *arg)
 {
-	int i, j;
+	int i;
 	builtins for_shell[] = {
-		{"exit", shell_exit},
-		{"env", print_the_env},
-		{'\0', NULL}
-	};
+		{"exit", builtin_exit},
+		{"env", builtin_print_env},
+		{"\0", NULL}};
 
-	for (i = 0; *for_shell[i].func_names != '\0'; i++)
+	for (i = 0; for_shell[i].func_names[0] != '\0'; i++)
 	{
 		if (stringcmp(input, for_shell[i].func_names))
 		{
-			for_shell[i].func(arg, env);
+			for_shell[i].func(arg);
 			return (0);
 		}
 	}

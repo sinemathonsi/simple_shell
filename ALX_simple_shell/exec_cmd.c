@@ -2,11 +2,14 @@
 
 void exec_cmd(char *cmd_with_path, char **av)
 {
-	int f_id, exec_ret;
+	int exec_ret;
+	pid_t pid;
 
+	pid = fork();
+	if (pid == -1)
+		perror("Error");
 
-	f_id = fork();
-	if (f_id == 0)
+	if (pid == 0)
 	{
 		exec_ret = execve(cmd_with_path, av, environ);
 		if (exec_ret == -1)

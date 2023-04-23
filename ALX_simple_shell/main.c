@@ -1,10 +1,5 @@
 #include "main.h"
 
-void sig_handler(int signal)
-{
-	return;
-}
-
 int word_count(char *input)
 {
 	int num_of_words = 0, i;
@@ -30,23 +25,20 @@ void parse_inp(char **av, char *input)
 	char *token;
 
 	token = strtok(input, " \n");
-		for (i = 0; token != NULL; i++)
-		{
-			av[i] = malloc(strlen(token) * sizeof(char));
-			strcpy(av[i], token);
-			token = strtok(NULL, " \n");
-		}
-		av[i] = NULL;
+	for (i = 0; token != NULL; i++)
+	{
+		av[i] = malloc(strlen(token) * sizeof(char));
+		strcpy(av[i], token);
+		token = strtok(NULL, " \n");
+	}
+	av[i] = NULL;
 }
 
-int main(int ac, char **av)
+int main(__attribute__((unused)) int ac, char **av)
 {
-	char *input, *path_to_cmd, **arr;
-	size_t n = 0;
-	ssize_t got_line;
-	int words, i;
+	char *input, **arr;
+	int i;
 
-	signal(SIGINT, sig_handler);
 	while (1)
 	{
 		shell_loop(av);

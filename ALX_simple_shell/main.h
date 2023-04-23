@@ -13,6 +13,17 @@
 
 extern char **environ;
 
+/**
+ * struct builtin_funcs - structure to hold and find builtin funcs
+ * @func_names: names of builtin func on cmd line
+ * @func: function ponter to builtin functions
+ */
+typedef struct builtin_funcs
+{
+	char *func_names;
+	void (*func)(char *);
+} builtins;
+
 char *found_path(char *cmd);
 void exec_cmd(char *cmd_with_path, char **av);
 
@@ -21,5 +32,9 @@ void parse_inp(char **av, char *input);
 void sig_handler(int signal);
 
 void shell_loop(char **av);
+
+int which_func(char *input, char *arg);
+void builtin_exit(char *status);
+void builtin_print_env(char *arg);
 
 #endif

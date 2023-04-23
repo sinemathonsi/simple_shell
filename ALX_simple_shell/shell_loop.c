@@ -5,7 +5,7 @@ void shell_loop(char **av)
 	char *input, *path_to_cmd, **arr;
 	size_t n = 0;
 	ssize_t got_line;
-	int words, i;
+	int words;
 
 	printf("($)");
 	got_line = getline(&input, &n, stdin);
@@ -22,9 +22,10 @@ void shell_loop(char **av)
 	if (*input == '\n')
 		return;
 
+	which_func(arr[0], arr[1]);
 	path_to_cmd = found_path(arr[0]);
 	if (path_to_cmd == NULL)
-		dprintf(STDERR_FILENO, "%s: No such file or directory\n",av[0]);
+		dprintf(STDERR_FILENO, "%s: No such file or directory\n", av[0]);
 	else
 		exec_cmd(path_to_cmd, arr);
 }
