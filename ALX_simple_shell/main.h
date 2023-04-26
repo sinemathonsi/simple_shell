@@ -33,7 +33,7 @@ int word_count(char *input);
 void parse_inp(char **av, char *input);
 int stringcmp(char *s1, char *s2);
 
-void shell_loop(char *argv_0_holder, char **av);
+void shell_loop(char *argv_0_holder, char **av, int flag);
 
 int which_func(char *input, char *arg);
 
