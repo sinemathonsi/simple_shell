@@ -22,10 +22,14 @@ void shell_loop(char *argv_0_holder, char **av, int flag)
 	if (*input == '\n')
 		return;
 
-	which_func(av[0], av[1]);		 /* find and execute builtin function */
-	path_to_cmd = found_path(av[0]); /* find path to non builtin function */
-	if (path_to_cmd == NULL)		 /* command not found */
-		dprintf(STDERR_FILENO, "%s: No such file or directory\n", argv_0_holder);
-	else
-		exec_cmd(path_to_cmd, av); /* execute found command */
+	if (which_func(av[0], av[1]) == -1) /* find and execute builtin function */
+	{
+		path_to_cmd = found_path(av[0]); /* find path to non builtin function */
+		if (path_to_cmd == NULL)		 /* command not found */
+			dprintf(STDERR_FILENO, "%s: No such file or directory\n", argv_0_holder);
+		else
+			exec_cmd(path_to_cmd, av); /* execute found command */
+	}
+	free(input);
+	free(path_to_cmd);
 }
