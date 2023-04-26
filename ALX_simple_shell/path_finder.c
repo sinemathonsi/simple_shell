@@ -15,22 +15,21 @@ char *found_path(char *cmd)
 		return (cmd);
 
 	path = getenv("PATH"); /* store entire path var */
-	cp_path = strdup(path);
-	token = strtok(cp_path, ":\n"); /* seperate each path to bins */
+	cp_path = _strdup(path);
+	token = my_strtok(cp_path, ":\n"); /* seperate each path to bins */
 	while (token != NULL)
 	{
-		path_srch = malloc((strlen(token) + strlen(cmd) + 2));
+		path_srch = malloc((_strlen(token) + _strlen(cmd) + 1));
 		/* append chars and command to each different path */
-		strcpy(path_srch, token);
-		strcat(path_srch, "/");
-		strcat(path_srch, cmd);
-		strcat(path_srch, "\0");
+		_strcpy(path_srch, token);
+		_strcat(path_srch, "/");
+		_strcat(path_srch, cmd);
 
 		stat_ret = stat(path_srch, &buffer);
 		if (stat_ret == 0)		/* use stat to check if file exists */
 			return (path_srch); /* file found */
 
-		token = strtok(NULL, ":\n");
+		token = my_strtok(NULL, ":\n");
 	}
 	free(path_srch);
 	return (NULL); /* file not found */

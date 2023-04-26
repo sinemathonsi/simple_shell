@@ -34,13 +34,13 @@ void parse_inp(char **av, char *input)
 	int i;
 	char *token;
 
-	token = strtok(input, " \n");
+	token = my_strtok(input, " \n");
 	for (i = 0; token != NULL; i++)
 	{
 		/* copy each string into argv at i index */
-		av[i] = malloc(strlen(token) * sizeof(char));
-		strcpy(av[i], token);
-		token = strtok(NULL, " \n");
+		av[i] = malloc(_strlen(token) * sizeof(char));
+		_strcpy(av[i], token);
+		token = my_strtok(NULL, " \n");
 	}
 	av[i] = NULL; /* null terminte argv */
 }

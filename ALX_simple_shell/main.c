@@ -9,7 +9,7 @@
 int main(__attribute__((unused)) int ac, char **av)
 {
 	char *argv_0_holder = av[0]; /* holds name of program for err msg */
-	int i, flag = isatty(STDIN_FILENO);
+	int flag = isatty(STDIN_FILENO);
 
 	while (1)
 	{

@@ -6,7 +6,7 @@
  */
 void builtin_exit(char *status)
 {
-	int num, i;
+	int num;
 
 	if (status == NULL)
 		exit(0);

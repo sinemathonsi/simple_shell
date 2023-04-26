@@ -41,4 +41,14 @@ void builtin_exit(char *status);
 
 void builtin_print_env(char *arg);
 
+/* my_strtok.c */
+unsigned int is_delim(char c, char *delim);
+char *my_strtok(char *src, char *delim);
+
+/* string_utils.c */
+int _strlen(char *str);
+char *_strdup(char *src);
+char *_strcpy(char *dest, char *src);
+char *_strcat(char *dest, char *to_cat);
+
 #endif
